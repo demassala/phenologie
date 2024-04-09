@@ -6,5 +6,9 @@ unique(SP)
 # nombre d'espèces
 Nbs=unique(SP)
 length(Nbs)
-
-View(SP)
+# Filtrer les données pour n'afficher que l'espèce "Vouacapoua americana"
+data_Vouacapoua_americana <- subset(data, Species == "americana")
+data_Vouacapoua_americana
+# Filtrer les données pour n'afficher que l'espèce "Symphonia globulifera"
+data_Symphonia_globulifera <- subset(data, Species == "globulifera")
+data_Symphonia_globulifera
