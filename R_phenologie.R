@@ -15,3 +15,7 @@ data_Symphonia_globulifera
 #Filtrer les données pour n'afficher que les Clusiaceae
 data_Clusiaceae <-subset(data, Family == "Clusiaceae")
 data_Clusiaceae
+# Nom unique les familles
+SP<-paste(data$Family)
+SP
+unique(SP)
