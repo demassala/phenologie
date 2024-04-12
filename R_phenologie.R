@@ -24,8 +24,24 @@ unique(SP)
 nrow(data)
 #différentes variables
 str(data)
-## Filtrer les lignes
-pheno %>%
-  filter(Genus="Symphonia" & Species="globulifera") %>%
+install.packages("tidyverse")
+library("tidyverse")
+## Filtrer que les Symphonia globulifera
+data %>%
+filter(Genus=="Symphonia" & Species=="globulifera") %>%
+select (Family:Species, X23.10.2020 : X23.01.2024) %>%
+print()-> data_Symphonia
+## Filtrer que les Goupia glabra
+data %>%
+  filter(Genus=="Goupia" & Species=="glabra") %>%
   select (Family:Species, X23.10.2020 : X23.01.2024) %>%
-  print()
+  print()-> data_Goupia
+## Filtrer que les Pradosia cochlearia
+data %>%
+  filter(Genus=="Pradosia" & Species=="cochlearia") %>%
+  select (Family:Species, X23.10.2020 : X23.01.2024) %>%
+  print()-> data_Goupia_cochlearia
+## Sélectionner des colonnes
+data %>%
+  select(Num_crown, Family:Species, Code.sp) %>%
+  print() ->data_Goupia_cochlearia_2
