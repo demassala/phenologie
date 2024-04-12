@@ -15,7 +15,17 @@ data_Symphonia_globulifera
 #Filtrer les données pour n'afficher que les Clusiaceae
 data_Clusiaceae <-subset(data, Family == "Clusiaceae")
 data_Clusiaceae
-# Nom unique les familles
+# Noms unique des familles
 SP<-paste(data$Family)
 SP
 unique(SP)
+#Jeu de données Synthese_Pheno_20230724.csv
+ data <- data.csv2
+nrow(data)
+#différentes variables
+str(data)
+## Filtrer les lignes
+pheno %>%
+  filter(Genus="Symphonia" & Species="globulifera") %>%
+  select (Family:Species, X23.10.2020 : X23.01.2024) %>%
+  print()
