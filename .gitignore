@@ -4,3 +4,9 @@
 .Ruserdata
 #Fichier csv
 *.csv
+
+*source fonction
+Func_analyse.R
+func_dataPrepExplo.R
+R_phenologie.R
+myTheme.R

@@ -45,3 +45,41 @@ data %>%
 data %>%
   select(Num_crown, Family:Species, Code.sp) %>%
   print() ->data_Goupia_cochlearia_2
+
+## phenologie
+install.packages("pacman")
+pacman::p_load("plotly","strucchange","timeSeries","lubridate","bfast","tidyverse",
+               "data.table","ggplot2","ggfortify","zoo","readxl","readr","cluster",
+               "stringr","bookdown","ggpubr","knitr","kableExtra","tibbletime","pracma",
+               "imputeTS","TraMineR","clValid","cluster","FactoMineR","factoextra","dunn.test",
+               "ggrepel")
+# Source custom functions
+source("Func_dataPrepExplo.R")
+source("Func_analyse.R")
+source("myTheme.R")
+install.packages("tidyverse")
+library("tidyverse")
+
+##PHENOLOGIE
+## Lecture du jeu de données
+read_csv2("Synthese_Pheno_20230724.csv") ->
+  pheno
+# On ajuste en supprimant les colonnes qu'on veut garder (dans ton jeux de données adapté tu as deux colonnes factices encore)
+pheno <- pheno[,-c(1,4)]
+# Formatage des donnees
+PrepPhase(pheno) -> pheno2 #Preparation des données brutes
+# Formatage des colonnes
+pheno2 = pheno2 %>% mutate(CrownID = as.factor(CrownID), # Pour être sure que ce soit considérer comme un facteur
+                           PPVeg = str_replace_all(PPVeg,"(NA|Na|Na;|NA;)", NA_character_), # au cas-où il y a des NA mal écrits
+                           PPVeg = as.factor(PPVeg), # Pour être sure que ce soit considérer comme un facteur
+                           Update = as.Date(Update,format = "%d/%m/%Y")) # Pour être sure de la bonne date au bon format
+
+# Ligne de code problematique
+Leaf_Pattern(
+  Data = filter(pheno2, Usable == 1) ,
+  Obs_Veg = "PPVeg",
+  Spec = "Symphonia_globulifera",
+  fertility = TRUE
+)[[2]]
+
+
