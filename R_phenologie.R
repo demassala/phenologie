@@ -58,7 +58,7 @@ source("Func_dataPrepExplo.R")
 source("Func_analyse.R")
 source("myTheme.R")
 install.packages("tidyverse")
-library("tidyverse")
+library(tidyverse)
 
 ##PHENOLOGIE
 ## Lecture du jeu de données
@@ -75,11 +75,13 @@ pheno2 = pheno2 %>% mutate(CrownID = as.factor(CrownID), # Pour être sure que c
                            PPVeg = as.factor(PPVeg), # Pour être sure que ce soit considérer comme un facteur
                            Update = as.Date(Update,format = "%d/%m/%Y")) # Pour être sure de la bonne date au bon format
 
-# Ligne de code problematique
+#Differentes dates de floraison de Symphonia globufera
 Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
   Spec = "Symphonia_globulifera",fertility = TRUE)[[2]]
+#Differentes dates de floraison de Vouacapoua americana
+Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
+             Spec = "Vouacapoua_americana",fertility = TRUE)[[2]]
+#Differentes dates de floraison de Symphonia sp.1
+Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
+             Spec = "Symphonia_sp.1",fertility = TRUE)[[2]]
 
-# Nom unique des espèces
-SP<-paste(data$Genus,data$Species)
-SP
-unique(SP)
