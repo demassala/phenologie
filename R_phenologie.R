@@ -84,4 +84,8 @@ Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
 #Differentes dates de floraison de Symphonia sp.1
 Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
              Spec = "Symphonia_sp.1",fertility = TRUE)[[2]]
+#Differentes dates de floraison de Sterculia_pruriens
+Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
+             Spec = "Sterculia_pruriens",fertility = TRUE)[[2]]
+
 
