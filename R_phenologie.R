@@ -19,8 +19,9 @@ data_Clusiaceae
 SP<-paste(data$Family)
 SP
 unique(SP)
+
 #Jeu de données Synthese_Pheno_20230724.csv
- data <- data.csv2
+ data <("Synthese_Pheno_20230724.csv")
 nrow(data)
 #différentes variables
 str(data)
@@ -88,4 +89,31 @@ Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
 Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
              Spec = "Sterculia_pruriens",fertility = TRUE)[[2]]
 
+# Les noms de tous les genres
+data %>% select(Genus)  %>% pull() %>% unique()  %>% sort() %>% print()
+# Les noms de toutes les especes
+data %>% select(Genus,Species)  %>% pull() %>% unique()  %>% sort() %>% print()
+# Floraison
+GraphPropF <- LeafedOTim(Data=
+                         Spec= WantedSpec,
+                         Pattern=c("Fl"),
+                         Obs_Veg = "PPFlo")
+GraphPropF[[2]]
+install.packages("nlme")
+library(nlme)
+
+#tableau synthese pour le calcule des metriques
+pheno <-read_csv2("Synthese_Pheno_20230724.csv")
+pheno %>%
+select(Family,Species,Genus, `23/10/2020` : `23/01/2024`) %>%
+print () ->
+  synthese_tab
+#Pivotement du tableau synthese_tab en tableau long
+synthese_tab %>%
+pivot_longer(
+  cols =c(`23/10/2020` : `23/01/2024`),
+  names_to = "date",
+  values_to = "phenophases") %>%
+  print()->
+  synthese_tab1
 
