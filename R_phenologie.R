@@ -1,4 +1,4 @@
-data <- read.csv2("Synthese_Pheno_20230724.csv")
+data <- read.csv2("Synthese_Pheno_24.csv")
 # Nom unique des espèces
 SP<-paste(data$Genus,data$Species)
 SP
@@ -6,6 +6,7 @@ unique(SP)
 # nombre d'espèces
 Nbs=unique(SP)
 length(Nbs)
+
 # Filtrer les données pour n'afficher que l'espèce "Vouacapoua americana"
 data_Vouacapoua_americana <- subset(data, Species == "americana")
 data_Vouacapoua_americana
@@ -21,39 +22,44 @@ SP
 unique(SP)
 
 #Jeu de données Synthese_Pheno_20230724.csv
- data <("Synthese_Pheno_20230724.csv")
+ data <("Synthese_Pheno_24.csv")
 nrow(data)
 #différentes variables
 str(data)
 install.packages("tidyverse")
 library("tidyverse")
-## Filtrer que les Symphonia globulifera
+
+       ## Filtrer que les Symphonia globulifera
 data %>%
 filter(Genus=="Symphonia" & Species=="globulifera") %>%
 select (Family:Species, X23.10.2020 : X23.01.2024) %>%
 print()-> data_Symphonia
-## Filtrer que les Goupia glabra
+
+      ## Filtrer que les Goupia glabra
 data %>%
   filter(Genus=="Goupia" & Species=="glabra") %>%
   select (Family:Species, X23.10.2020 : X23.01.2024) %>%
   print()-> data_Goupia
-## Filtrer que les Pradosia cochlearia
+
+    ## Filtrer que les Pradosia cochlearia
 data %>%
   filter(Genus=="Pradosia" & Species=="cochlearia") %>%
   select (Family:Species, X23.10.2020 : X23.01.2024) %>%
   print()-> data_Goupia_cochlearia
-## Sélectionner des colonnes
+
+    ## Sélectionner des colonnes
 data %>%
   select(Num_crown, Family:Species, Code.sp) %>%
   print() ->data_Goupia_cochlearia_2
 
-## phenologie
+    ## phenologie
 install.packages("pacman")
 pacman::p_load("plotly","strucchange","timeSeries","lubridate","bfast","tidyverse",
                "data.table","ggplot2","ggfortify","zoo","readxl","readr","cluster",
                "stringr","bookdown","ggpubr","knitr","kableExtra","tibbletime","pracma",
                "imputeTS","TraMineR","clValid","cluster","FactoMineR","factoextra","dunn.test",
                "ggrepel")
+
 # Source custom functions
 source("Func_dataPrepExplo.R")
 source("Func_analyse.R")
@@ -61,13 +67,14 @@ source("myTheme.R")
 install.packages("tidyverse")
 library(tidyverse)
 
-##PHENOLOGIE
+          ##PHENOLOGIE
 ## Lecture du jeu de données
-read_csv2("Synthese_Pheno_20230724.csv") ->
+data <- read.csv2("Synthese_Pheno_24.csv")
   pheno
 # On ajuste en supprimant les colonnes qu'on veut garder (dans ton jeux de données adapté tu as deux colonnes factices encore)
 pheno <- pheno[,-c(1,4)]
-# Formatage des donnees
+
+   ## Formatage des donnees
 PrepPhase(pheno) -> pheno2
 #Preparation des données brutes
 # Formatage des colonnes
@@ -93,9 +100,10 @@ Leaf_Pattern(Data = filter(pheno2, Usable == 1) ,Obs_Veg = "PPVeg",
 data %>% select(Genus)  %>% pull() %>% unique()  %>% sort() %>% print()
 # Les noms de toutes les especes
 data %>% select(Genus,Species)  %>% pull() %>% unique()  %>% sort() %>% print()
+
 # Floraison
-GraphPropF <- LeafedOTim(Data=
-                         Spec= WantedSpec,
+GraphPropF <- LeafedOTim (Data=pheno2
+                         Spec= "americana",
                          Pattern=c("Fl"),
                          Obs_Veg = "PPFlo")
 GraphPropF[[2]]
@@ -103,6 +111,7 @@ install.packages("nlme")
 library(nlme)
 
 #tableau synthese pour le calcule des metriques
+
 pheno <-read_csv2("Synthese_Pheno_20230724.csv")
 pheno %>%
 select(Family,Species,Genus, `23/10/2020` : `23/01/2024`) %>%
@@ -129,53 +138,93 @@ synthese_tab1 %>%
 
               # premiers calculs
 n_event_flo_spec = pheno2 %>%
-  filter(Genus_Spec =="Symphonia globulifera") %>%
+  filter(Genus_Spec =="Symphonia_globulifera") %>%
   distinct(CrownID,date,PPFlo) %>%
   group_by(CrownID,PPFlo) %>%
   summarise(n = n()) %>% filter(PPFlo == "Fl") %>% ungroup() %>% pull(n) %>% sum()
 
               #Schéma général
-Leaf_Pattern(Data =pheno2  %>% filter(Usable ==1), Obs_Veg ="PPVeg", Spec = "Symphonia globulifera", fertility = TRUE)[[2]]
+Leaf_Pattern(Data =pheno2  %>% filter(Usable ==1), Obs_Veg ="PPVeg", Spec = "Symphonia_globulifera", fertility = TRUE)[[2]]
 
          #Temps des phénophases
+
           ##Temps de séjour
     # C’est la différence entre le début d’un événement et la fin du même événement
      PhenoPhase_Time(
        Data = pheno2,
        Pattern = "Fl",
-       Spec = "Symphonia globulifera",
+       Spec = "Symphonia_globulifera",
        Obs_Veg = "PPFlo",
        markers = "Residence_time"
      )[[2]]
+
+     ##Temps de séjour
+     # C’est la différence entre le début d’un événement et la fin du même événement
+     PhenoPhase_Time(
+       Data = pheno2,
+       Pattern = "Fl",
+       Spec = "Symphonia_sp.1",
+       Obs_Veg = "PPFlo",
+       markers = "Residence_time"
+     )[[2]]
+
+     ##Temps de séjour
+     # C’est la différence entre le début d’un événement et la fin du même événement
+     PhenoPhase_Time(
+       Data = pheno2,
+       Pattern = "Fl",
+       Spec = "Vouacapoua_americana",
+       Obs_Veg = "PPFlo",
+       markers = "Residence_time"
+     )[[2]]
+
      ### Temps de retour
    ## C’est la différence entre la fin d’un événement et le début de l’événement suivant
      PhenoPhase_Time(
        Data = pheno2,
-       Pattern = "Symphonia globulifera",
-       Spec = ,
+       Pattern = "Fl",
+       Spec = "Symphonia_globulifera",
        Obs_Veg = "PPFlo",
        markers = "Return_time"
      )[[2]]
-   ## Proportion d’individus dans une floraison par date
+
+     ### Temps de retour
+     ## C’est la différence entre la fin d’un événement et le début de l’événement suivant
+     PhenoPhase_Time(
+       Data = pheno2,
+       Pattern = "Fl",
+       Spec = "Symphonia_sp.1",
+       Obs_Veg = "PPFlo",
+       markers = "Return_time"
+     )[[2]]
+
+     ### Temps de retour
+     ## C’est la différence entre la fin d’un événement et le début de l’événement suivant
+     PhenoPhase_Time(
+       Data = pheno2,
+       Pattern = "Fl",
+       Spec = "Vouacapoua_americana",
+       Obs_Veg = "PPFlo",
+       markers = "Return_time"
+     )[[2]]
+
+
+     ## Proportion d’individus dans une floraison par date
      GraphPropF <- LeafedOTim(Data=pheno2,
-                              Spec= "Symphonia globulifera",
+                              Spec= "Symphonia_globulifera",
                               Pattern=c("Fl"),
-                              Obs_Veg = "PPFlo")
+                           Obs_Veg = "PPFlo")
      GraphPropF[[2]]
 
 ## Proportion de phénophase
-# par mois:
- Il s’agit du nombre d’un phénophase donné à chaque mois par an.
-  Nous regroupons d’abord par espèce, par année et après mois et après nous
-  calculons le nombre de phénophases d’événement ensuite, le nombre total de
-   phénophases par mois et ensuite, la proportion de phénophases données.
+# par mois: Il s’agit du nombre d’un phénophase donné à chaque mois par an.Nous regroupons d’abord par espèce, par année et après mois et après nous
+  calculons le nombre de phénophases d’événement ensuite, le nombre total de phénophases par mois et ensuite, la proportion de phénophases données.
 
-   Nous comptons donc :
-     $$ \frac{\text{number of the given phenophases in a month}}{\text{all
+   #Nous comptons donc : $$ \frac{\text{number of the given phenophases in a month}}{\text{all
        phenophases in the same month}}$$
-Si une personne a deux Fl obs au cours d’un même mois, nous comptons comme deux.
+# Si une personne a deux Fl obs au cours d’un même mois, nous comptons comme deux.
 
-   Leaf_Circular(Data = Full, Spec = WantedSpec,Pattern = c("Fl"),
+   Leaf_Circular(Data = pheno2, Spec = Symphonia_globulifera,Pattern = c("Fl"),
                  Obs_Veg = "PPFlo",perYears = FALSE)[[2]]
 
   # par mois et par année
@@ -183,13 +232,12 @@ Si une personne a deux Fl obs au cours d’un même mois, nous comptons comme de
                  Obs_Veg = "PPFlo",perYears = TRUE)[[2]]
 
  ## Proportion d’individus dans une phénophase donnée
-   Nous détectons le pic (début, max, fin) en fonction des
-   paramètres et du signal traité (Moyenne mobile)
+   #Nous détectons le pic (début, max, fin) en fonction des paramètres et du signal traité (Moyenne mobile)
 
-   # signal
+                              # signal
 
    data_signal = LeafedOTim(Data=pheno2 %>% filter(Usable==1),
-                            Spec= "Symphonia globulifera",
+                            Spec= "Symphonia_globulifera",
                             Pattern=c("Fl"),
                             Obs_Veg = "PPFlo")[[1]]
 
@@ -241,11 +289,30 @@ Si une personne a deux Fl obs au cours d’un même mois, nous comptons comme de
                                   max = dates[dates_max],
                                   range = abs(difftime(dates[dates_begin],dates[dates_end])),
                                   start = dates[dates_begin],
-                                  end = dates[dates_end]
-           )
-
-           kable(summary_table)
+                                  end = dates[dates_end])kable(summary_table)
 
 
-           ```
+
+           #tableau synthese pour le calcule des metriques
+
+
+           ## Filtrer que les Symphonia globulifera
+            pheno2 %>%
+             filter(Genus=="Symphonia" & Species=="globulifera") %>%
+             select (Genus_Spec,date,PPFlo) %>%
+             print()-> synthese_Sympho
+
+
+
+
+
+           ## Métriques pour la floraison
+  # Coefficient de variation:  Le coefficient de variation mesure la variabilité relative des dates de floraison par rapport à la moyenne
+      # Supposons que vous avez un vecteur ou une colonne de dates de floraison dans votre dataframe appelé "dates_floraison"
+     # Calcul du coefficient de variation (CV)
+           cv_dates_floraison <- sd(dates_floraison) / mean(dates_floraison) * 100
+
+
+
+
 
