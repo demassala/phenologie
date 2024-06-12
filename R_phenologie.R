@@ -111,7 +111,7 @@ data2 = data2 %>% mutate(CrownID = as.factor(CrownID), # Pour être sure que ce 
                            Update = as.Date(Update,format = "%d/%m/%Y")) # Pour être sure de la bonne date au bon format
 
 
-                 #### DIFFERENTES DATES DE FLORAISON DES SIX ESPECES CHOISI ####
+                 #### DIFFERENTES DATES DE FLORAISON DES SIX ESPECES CHOISI: SCHEMA DE FLORAISON GENERAL####
 
   ## Pour Symphonia globulifera
 Leaf_Pattern(Data = filter(data2, Usable == 1) ,Obs_Veg = "PPVeg",
@@ -316,7 +316,7 @@ PhenoPhase_Time(
 )[[2]]
 
 
-                        #### NOMBRE D'INVIVIDU EN FLEUR PAR DATE ####
+                        #### NOMBRE D'INVIVIDUS EN FLEUR PAR DATE ####
 
 ## Pour Symphonia globulifera
 GraphPropF_globu <- LeafedOTim(Data=data2,
@@ -361,7 +361,9 @@ GraphPropF_insignis <- LeafedOTim(Data=data2,
 GraphPropF_insignis[[2]]
 
 
-               #### PROPORTION DE PHENOPHASE PAR MOI
+               #### PROPORTION DE PHENOPHASE PAR MOI ####
+# Il s’agit du nombre d’un phénophase donné à chaque mois par an.Nous regroupons d’abord par espèce, par année et après mois et après nouscalculons le nombre de phénophases d’événement ensuite, le nombre total de phénophases par mois et ensuite, la proportion de phénophases données.
+
 
 # Pour Symphonia globulifera
 Leaf_Circular(Data = data2,
@@ -449,9 +451,8 @@ Leaf_Circular(Data = data2,
               Obs_Veg = "PPFlo",
               perYears = T)[[2]]
 
-            #### Temporalité de la proportion d'individu en floraison ####
-
-# Pour S.globulifera #
+#### Temporalité de la proportion d'individu en floraison ####
+## Pour S.globulifera
 
 # 1) Signal de floraison au cours du temps (nombre d'individu en fleur au cours du temps).
 # (plot the number of each individual in the given State (Pattern) across sampling time.)
@@ -494,7 +495,7 @@ amplitude_peaks_globu = findpeaks(moyenne_mobile_globu,minpeakheight  = 10,nups 
 # Compilation des amplitudes relles des pics du signal
 amplitude_real_globu = signal_globu[dates_max_globu]
 
-#### Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2 ###
+# Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2 ###
 
 Plot = ggplot(data_signal_globu,
               aes(x = date)) +
@@ -524,9 +525,8 @@ Plot = ggplot(data_signal_globu,
 Plot
 
 
-           ##### Temporalité de la proportion d'individu en floraison ####
-
-                             #### Pour Symphonia sp.1###
+#### Temporalité de la proportion d'individu en floraison ####
+## Pour Symphonia sp.1
 
 # 1) Signal de floraison au cours du temps (nombre d'individu en fleur au cours du temps).
 # (plot the number of each individual in the given State (Pattern) across sampling time.)
@@ -569,7 +569,7 @@ amplitude_peaks_sp = findpeaks(moyenne_mobile_sp,minpeakheight  = 10,nups = 1)[,
 # Compilation des amplitudes relles des pics du signal
 amplitude_real_sp = signal_sp[dates_max_sp]
 
-#### Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
+# Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
 
 Plot = ggplot(data_signal_sp,
               aes(x = date)) +
@@ -599,11 +599,8 @@ Plot = ggplot(data_signal_sp,
 Plot
 
 
-
-
 ##### Temporalité de la proportion d'individu en floraison ####
-
-#### Pour Vouacapoua_americana ###
+## Pour Vouacapoua_americana
 
 # 1) Signal de floraison au cours du temps (nombre d'individu en fleur au cours du temps).
 # (plot the number of each individual in the given State (Pattern) across sampling time.)
@@ -646,7 +643,7 @@ amplitude_peaks_voua = findpeaks(moyenne_mobile_voua,minpeakheight  = 10,nups = 
 # Compilation des amplitudes relles des pics du signal
 amplitude_real_voua = signal_voua[dates_max_voua]
 
-#### Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
+# Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
 
 Plot = ggplot(data_signal_voua,
               aes(x = date)) +
@@ -677,10 +674,8 @@ Plot
 
 
 
-
 ##### Temporalité de la proportion d'individu en floraison ####
-
-#### Pour Couma_guianensis ###
+## Pour Couma_guianensis
 
 # 1) Signal de floraison au cours du temps (nombre d'individu en fleur au cours du temps).
 # (plot the number of each individual in the given State (Pattern) across sampling time.)
@@ -723,7 +718,7 @@ amplitude_peaks_Cou = findpeaks(moyenne_mobile_Cou,minpeakheight  = 10,nups = 1)
 # Compilation des amplitudes relles des pics du signal
 amplitude_real_Cou = signal_Cou[dates_max_Cou]
 
-#### Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
+# Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
 
 Plot = ggplot(data_signal_Cou,
               aes(x = date)) +
@@ -753,8 +748,8 @@ Plot = ggplot(data_signal_Cou,
 Plot
 
 
-
-# Pour Moronobea coccinea #
+##### Temporalité de la proportion d'individu en floraison ####
+## Pour Moronobea coccinea
 
 # 1) Signal de floraison au cours du temps (nombre d'individu en fleur au cours du temps).
 # (plot the number of each individual in the given State (Pattern) across sampling time.)
@@ -797,7 +792,7 @@ amplitude_peaks_Moro  = findpeaks(moyenne_mobile_Moro ,minpeakheight  = 10,nups 
 # Compilation des amplitudes relles des pics du signal
 amplitude_real_Moro  = signal_Moro [dates_max_Moro ]
 
-#### Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
+# Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
 
 Plot = ggplot(data_signal_Moro ,
               aes(x = date)) +
@@ -827,9 +822,8 @@ Plot = ggplot(data_signal_Moro ,
 Plot
 
 
-
-
-# Pour Platonia insignis#
+##### Temporalité de la proportion d'individu en floraison ####
+## Pour Platonia insignis
 
 # 1) Signal de floraison au cours du temps (nombre d'individu en fleur au cours du temps).
 # (plot the number of each individual in the given State (Pattern) across sampling time.)
@@ -906,76 +900,351 @@ Plot
 
 
 
+      ##### DEUXIEME PARTIE: RELATION DISTANCE ENTRE LES ARDRES ET LA FLORAISON #####
+
+## INSTALLATION  ET CHARGEMENT DES PACKEGES ##
+install.packages("geosphere")
+install.packages("ggrepel")
+install.packages("ggplot2")
+install.packages("readxl")
+install.packages("nlme")
+install.packages("corrplot")
+install.packages("readr")
+install.packages("tidyverse")
+library(geosphere)
+library(ggplot2)
+library(ggrepel)
+library(readxl)
+library(nlme)
+library(corrplot)
+library("tidyverse")
+library(readr)
 
 
+                ####  CORDONNEES GPS DES PIEDS DE Symphonia globulifera ####
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ##### DEUXIEME PARTIE: RELATION DISTANCE DES ARDRE ET SYNCHRONISATION DE LA FLORAISON #####
-
-                    ###### REPARTITION DES ARBRES DANS L'ESPACE #####
-
-     ### LECTURE DE LA BASE DE DONNEES CONTENANT LES CORDONNEES GPS DES PIEDS DE Symphonia globulifera####
 distan <-read.csv2("Distance_sym.csv")
 
-                       ## INSTALLATION DES PACKEGES
-install.packages("geosphere")
-library(geosphere)
-install.packages("ggplot2")
-library(ggplot2)
-                 ### CONVERTIR LES COORDONNEES GPS EN MATRICE ###
-Distan_1<- as.matrix(distan[, c("X", "Y")])
-
-                  ###CALCULER LA MATRICE DE DISTANCE###
-distances <- distm(Distan_1, fun = distHaversine)
-
-### Afficher la matrice de distances###
-print(distances)
-
-### Convertir explicitement les colonnes en numériques###
-distan$Y <- as.numeric(distan$Y)
-distan$X <- as.numeric(distan$X)
-
-# Vérifier de nouveau les types de données des colonnes
-str(distan)
-
-
-#### Graphique de dispersion des coordonnées GPS de chaque pieds de Symphonia glo.###
-P <- ggplot(distan, aes(x = X, y = Y)) +
+        #### Graphique de dispersion des coordonnées GPS de chaque pieds de Symphonia glo.####
+P1 <- ggplot(distan, aes(x = X, y = Y)) +
   geom_point(size = 3, color = "blue") +
-  geom_text(aes(label = arbres), vjust = -1, color = "black")+
+  geom_text_repel(aes(label = arbres), vjust = -1, color = "black") +
   labs(title = "Dispersion des differents pieds de Symphonia gl.",
-       x = "longitude",
-       y = "latitude") +
+       x = "Longitude",
+       y = "Latitude") +
+  theme_minimal()
+# Afficher le graphique
+print(P1)
+
+ ### CONVERTIR LES COORDONNEES GPS EN MATRICE ###
+Distan_1<- as.matrix(distan[, c("X", "Y")])
+###CALCULER LA MATRICE DE DISTANCE###
+distance1 <- distm(Distan_1)
+### Afficher la matrice de distances###
+print(distance1)
+
+#### CORRELATION ENTRE LES DIFFERENTES FLORAISONS ###
+   ### POUR  Symphonia globulifera.###
+Simple<-read_csv2("Symp_2024.csv")
+# Afficher les premières lignes pour vérifier le chargement
+head(Simple)
+
+### CORRELAGTION DE LA FLORAISON DES Symphonia gl.###
+# Restructurer les données pour une analyse de corrélation
+floraison_wide <- Simple %>%
+  group_by(Arbres, Annee, Mois) %>%
+  summarise(Floraison = mean(Floraison)) %>%
+  pivot_wider(names_from = Arbres, values_from = Floraison)
+# Calculer les corrélations entre les arbres
+correlation_Mat <- cor(floraison_wide[,-(1:2)], use="complete.obs")
+# Afficher la matrice de corrélation
+print(correlation_Mat)
+# Visualiser la matrice de corrélation
+corrplot(correlation_Mat, method = "circle")
+
+#### PLOT MATRICE DISTANCE ARBRES ET MATRICE CORRELATION ####
+plot(distance1, correlation_Mat)
+
+
+
+                ###  CORDONNEES GPS DES PIEDS DE Couma_guianensis ####
+
+dist_2<-read.csv2("Distance_Couma.csv")
+
+#### Graphique de dispersion des coordonnées GPS de chaque pieds de Couma_guianensis###
+P2 <- ggplot(dist_2, aes(x = X, y = Y)) +
+  geom_point(size = 3, color = "blue") +
+  geom_text_repel(aes(label = arbres), vjust = -1, color = "black") +
+  labs(title = "Dispersion des differents pieds de Couma_guianensis",
+       x = "Longitude",
+       y = "Latitude") +
+  theme_minimal()
+# Afficher le graphique
+print(P2)
+### CONVERTIR LES COORDONNEES GPS EN MATRICE ###
+Distan_3<- as.matrix(dist_2[, c("X", "Y")])
+###CALCULER LA MATRICE DE DISTANCE###
+distance2 <- distm(Distan_3)
+### Afficher la matrice de distances###
+print(distance2)
+#### CORRELATION ENTRE LES DIFFERENTES FLORAISONS ###
+### POUR  Couma_guianensis ###
+Couma<-read_csv2("Couma_2024.csv")
+# Afficher les premières lignes pour vérifier le chargement
+head(Couma)
+
+### CORRELAGTION DE LA FLORAISON DES Couma_guianensis.###
+# Restructurer les données pour une analyse de corrélation
+floraison_couma<- Couma %>%
+  group_by(Arbres, Annee, Mois) %>%
+  summarise(Floraison = mean(Floraison)) %>%
+  pivot_wider(names_from = Arbres, values_from = Floraison)
+# Calculer les corrélations entre les arbres
+correlation_couma <- cor(floraison_couma[,-(1:2)], use="complete.obs")
+# Afficher la matrice de corrélation
+print(correlation_couma)
+# Visualiser la matrice de corrélation
+corrplot(correlation_couma, method = "circle")
+#### PLOT MATRICE DISTANCE ARBRES ET MATRICE CORRELATION ####
+plot(distance2, correlation_couma)
+
+
+               ###  CORDONNEES GPS DES PIEDS DE Moronobea coccinea ####
+
+dist_3<-read.csv2("Distance_Morono.csv")
+#### Graphique de dispersion des coordonnées GPS de chaque pieds de Moronobea coccinea###
+P3 <- ggplot(dist_3, aes(x = X, y = Y)) +
+  geom_point(size = 3, color = "blue") +
+  geom_text_repel(aes(label = arbres), vjust = -1, color = "black") +
+  labs(title = "Dispersion des differents pieds de Moronobea coccinea",
+       x = "Longitude",
+       y = "Latitude") +
+  theme_minimal()
+# Afficher le graphique
+print(P3)
+### CONVERTIR LES COORDONNEES GPS EN MATRICE ###
+Distan_4<- as.matrix(dist_3[, c("X", "Y")])
+###CALCULER LA MATRICE DE DISTANCE###
+distance3 <- distm(Distan_4)
+### Afficher la matrice de distances###
+print(distance3)
+
+
+### CORRELATION ENTRE LES DIFFERENTES FLORAISONS ###
+### POUR  Couma_guianensis ###
+Morono<-read_csv2("Morono_2024.csv")
+# Afficher les premières lignes pour vérifier le chargement
+head(Morono)
+
+### CORRELAGTION DE LA FLORAISON DES Moronobea coccinea###
+# Restructurer les données pour une analyse de corrélation
+floraison_Morono<- Morono%>%
+  group_by(Arbres, Annee, Mois) %>%
+  summarise(Floraison = mean(Floraison)) %>%
+  pivot_wider(names_from = Arbres, values_from = Floraison)
+# Calculer les corrélations entre les arbres
+correlation_Morono <- cor(floraison_Morono[,-(1:2)], use="complete.obs")
+# Afficher la matrice de corrélation
+print(correlation_Morono)
+# Visualiser la matrice de corrélation
+corrplot(correlation_Morono, method = "circle")
+#### PLOT MATRICE DISTANCE ARBRES ET MATRICE CORRELATION ####
+plot(distance3, correlation_Morono)
+
+
+                ###  CORDONNEES GPS DES PIEDS DE Platonia insignis ###
+
+dist_4<-read.csv2("Distance_Plato.csv")
+
+#### Graphique de dispersion des coordonnées GPS de chaque pieds de Platonia insignis###
+P4 <- ggplot(dist_3, aes(x = X, y = Y)) +
+  geom_point(size = 3, color = "blue") +
+  geom_text_repel(aes(label = arbres), vjust = -1, color = "black") +
+  labs(title = "Dispersion des differents pieds de Platonia insignis",
+       x = "Longitude",
+       y = "Latitude") +
+  theme_minimal()
+# Afficher le graphique
+print(P4)
+
+### CONVERTIR LES COORDONNEES GPS EN MATRICE ###
+Distan_5<- as.matrix(dist_4[, c("X", "Y")])
+###CALCULER LA MATRICE DE DISTANCE###
+distance4 <- distm(Distan_5)
+### Afficher la matrice de distances###
+print(distance4)
+
+### CORRELATION ENTRE LES DIFFERENTES FLORAISONS ###
+### POUR  Platonia_insignis ###
+Plato <-read_csv2("Plato_2024.csv")
+# Afficher les premières lignes pour vérifier le chargement
+head(Plato)
+
+### CORRELAGTION DE LA FLORAISON DES Platonia insignis###
+# Restructurer les données pour une analyse de corrélation
+floraison_Plato<- Plato %>%
+  group_by(Arbres, Annee, Mois) %>%
+  summarise(Floraison = mean(Floraison)) %>%
+  pivot_wider(names_from = Arbres, values_from = Floraison)
+# Calculer les corrélations entre les arbres
+correlation_Plato <- cor(floraison_Plato[,-(1:2)], use="complete.obs")
+# Afficher la matrice de corrélation
+print(correlation_Plato)
+# Visualiser la matrice de corrélation
+corrplot(correlation_Plato, method = "circle")
+#### PLOT MATRICE DISTANCE ARBRES ET MATRICE CORRELATION ####
+plot(distance4, correlation_Plato)
+
+
+              ###  CORDONNEES GPS DES PIEDS DE Vouacapoua_americana ###
+
+dist_4<-read.csv2("Distance_Vouaca.csv")
+
+#### Graphique de dispersion des coordonnées GPS de chaque pieds de Platonia insignis###
+P5 <- ggplot(dist_3, aes(x = X, y = Y)) +
+  geom_point(size = 3, color = "blue") +
+  geom_text_repel(aes(label = arbres), vjust = -1, color = "black") +
+  labs(title = "Dispersion des differents pieds de Vouacapoua_americana",
+       x = "Longitude",
+       y = "Latitude") +
+  theme_minimal()
+# Afficher le graphique
+print(P5)
+
+### CONVERTIR LES COORDONNEES GPS EN MATRICE ###
+Distan_6<- as.matrix(dist_4[, c("X", "Y")])
+###CALCULER LA MATRICE DE DISTANCE###
+distance5 <- distm(Distan_6)
+### Afficher la matrice de distances###
+print(distance5)
+
+### CORRELATION ENTRE LES DIFFERENTES FLORAISONS ###
+### POUR  Vouacapoua_americana ###
+Vouaca <-read_csv2("Vouaca_2024.csv")
+# Afficher les premières lignes pour vérifier le chargement
+head(Vouaca)
+# Restructurer les données pour une analyse de corrélation
+floraison_Vouaca<- Vouaca %>%
+  group_by(Arbres, Annee, Mois) %>%
+  summarise(Floraison = mean(Floraison)) %>%
+  pivot_wider(names_from = Arbres, values_from = Floraison)
+# Calculer les corrélations entre les arbres
+correlation_Vouaca <- cor(floraison_Vouaca[,-(1:2)], use="complete.obs")
+# Afficher la matrice de corrélation
+print(correlation_Vouaca)
+# Visualiser la matrice de corrélation
+corrplot(correlation_Vouaca, method = "circle")
+#### PLOT MATRICE DISTANCE ARBRES ET MATRICE CORRELATION ####
+plot(distance5, correlation_Vouaca)
+
+
+                 ###  CORDONNEES GPS DES PIEDS DE Symphonia sp.1 ###
+
+dist_sp<-read.csv2("Distance_sp.1.csv")
+
+#### Graphique de dispersion des coordonnées GPS de chaque pieds de Platonia insignis###
+P6 <- ggplot(dist_sp, aes(x = X, y = Y)) +
+  geom_point(size = 3, color = "blue") +
+  geom_text_repel(aes(label = arbres), vjust = -1, color = "black") +
+  labs(title = "Dispersion des differents pieds de Symphonia sp.1",
+       x = "Longitude",
+       y = "Latitude") +
+  theme_minimal()
+# Afficher le graphique
+print(P6)
+
+### CONVERTIR LES COORDONNEES GPS EN MATRICE ###
+Distan_7<- as.matrix(dist_sp[, c("X", "Y")])
+###CALCULER LA MATRICE DE DISTANCE###
+distance6 <- distm(Distan_7)
+### Afficher la matrice de distances###
+print(distance6)
+
+### CORRELATION DE LA FLORAISON DES Symphonia sp.1 ###
+### POUR  Symphonia sp.1 ###
+Sp.1 <-read_csv2("Sp.1_2024.csv")
+# Afficher les premières lignes pour vérifier le chargement
+head(Sp.1)
+
+# Restructurer les données pour une analyse de corrélation
+floraison_Sp.1 <- Sp.1 %>%
+  group_by(Arbres, Annee, Mois) %>%
+  summarise(Floraison = mean(Floraison)) %>%
+  pivot_wider(names_from = Arbres, values_from = Floraison)
+# Calculer les corrélations entre les arbres
+correlation_Sp.1 <- cor(floraison_Sp.1[,-(1:2)], use="complete.obs")
+# Afficher la matrice de corrélation
+print(correlation_Sp.1)
+# Visualiser la matrice de corrélation
+corrplot(correlation_Sp.1, method = "circle")
+
+#### PLOT MATRICE DISTANCE ARBRES ET MATRICE CORRELATION ####
+plot(distance6, correlation_Sp.1)
+
+
+
+
+
+
+
+
+
+
+            ##### VERIFION SI CHAQUE ARBRE A FLEURIT CHAQUE ANNEE SUR LES 4 ans #####
+
+# Calculer le nombre de mois de floraison pour chaque arbre et chaque année
+floraison_summary <- Simple %>%
+  group_by(Arbres, Annee) %>%
+  summarise(months_in_floraison = sum(Floraison), .groups = 'drop')
+# Afficher les premières lignes pour vérifier
+print(head(floraison_summary))
+# Créer une table pivot pour visualiser la floraison par arbre et par année
+floraison_pivot <- Simple %>%
+  group_by(Arbres, Annee, Mois) %>%
+  summarise(Floraison = mean(Floraison), .groups = 'drop') %>%
+  pivot_wider(names_from = Mois, values_from = Floraison)
+# Afficher la table pivot
+print(floraison_pivot)
+# Vérifier la continuité de la floraison pour chaque arbre
+continuous_floraison <- floraison_pivot %>%
+  rowwise() %>%
+  mutate(continuous = all(c_across(1:12) == 1))
+# Afficher les résultats pour chaque arbre
+print(continuous_floraison)
+# Créer une visualisation de la floraison pour chaque arbre
+ggplot(Simple, aes(x = Mois, y = factor(Annee), fill = as.factor(Floraison))) +
+  geom_tile(color = "white") +
+  facet_wrap(~ Arbres, ncol = 5) +
+  scale_fill_manual(values = c("0" = "red", "1" = "green"),
+                    name = "Floraison",
+                    labels = c("No", "Yes")) +
+  labs(title = "Continuité de la Floraison des pieds de Symphonia gl. Arbres sur 4 ans",
+       x = "Mois",
+       y = "Année") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        panel.spacing = unit(1, "lines"))
+
+
+# Calculer la proportion de floraison pour chaque mois et chaque année
+floraison_summary <- Simple %>%
+  group_by(Annee, Mois) %>%
+  summarise(proportion_floraison = mean(Floraison)) %>%
+  ungroup()
+# Visualiser les proportions de floraison
+ggplot(floraison_summary, aes(x=Mois, y=proportion_floraison, color=factor(Annee))) +
+  geom_line(size = 1,) +
+  geom_point() +
+  labs(title="Proportion de Floraison par Mois et par Année des Symphonia gl.",
+       x="Mois",
+       y="Proportion de Floraison",
+       color="Année") +
   theme_minimal()
 
-### Afficher le graphique ###
-print(P)
 
 
 
-       ####  PLOT MATRICE DISTANCE ARBRES ET MATRICE CORRELATION #####
-load("C://Users/SCD UM/Documents/R_floraison/pheno_2024/Script_pheno_indices/correlation.Rdata")
-plot(distances, correlation_Mat)
 
 
 
@@ -1091,140 +1360,15 @@ plot(distances, correlation_Mat)
 
 
 
-# Floraison
-GraphPropF <- LeafedOTim (Data=data2,Spec= "Vouacapoua_americana",Pattern=c("Fl"),Obs_Veg = "PPFlo")
-GraphPropF[[2]]
-# Floraison ----
-#GraphPropF <- LeafedOTim (Data= data2,Spec= "Symphonia_globulifera",Pattern=c("Fl"), Obs_Veg = "PPFlo")
-GraphPropF[[2]]
-install.packages("nlme")
-library(nlme)
-              # Floraison du flux de travail
-#Nous n’acceptons d’évaluer le flux de travail de floraison que si nous
-#avons au moins trois événements de floraison par date chez tous les individus de l’espèce
 
-              # premiers calculs
-n_event_flo_spec = data2 %>%
-  filter(Genus_Spec =="Symphonia_globulifera") %>%
-  distinct(CrownID,date,PPFlo) %>%
-  group_by(CrownID,PPFlo) %>%
-  summarise(n = n()) %>% filter(PPFlo == "Fl") %>% ungroup() %>% pull(n) %>% sum()
 
-              #Schéma général
-Leaf_Pattern(Data =data2  %>% filter(Usable ==1), Obs_Veg ="PPVeg", Spec = "Symphonia_globulifera", fertility = TRUE)[[2]]
 
-         #
-## Proportion de phénophase
-# par mois: Il s’agit du nombre d’un phénophase donné à chaque mois par an.Nous regroupons d’abord par espèce, par année et après mois et après nouscalculons le nombre de phénophases d’événement ensuite, le nombre total de phénophases par mois et ensuite, la proportion de phénophases données.
 
-   #Nous comptons donc : $$ \frac{\text{number of the given phenophases in a month}}{\text{allphenophases in the same month}}$$
-# Si une personne a deux Fl obs au cours d’un même mois, nous comptons comme deux.
 
-   Leaf_Circular(Data = data2, Spec = "Symphonia_globulifera",Pattern = c("Fl"),
-                 Obs_Veg = "PPFlo",perYears = FALSE)[[2]]
 
-   Leaf_Circular(Data = data2, Spec = "Symphonia_sp.1",Pattern = c("Fl"),
-                 Obs_Veg = "PPFlo",perYears = FALSE)[[2]]
 
-   Leaf_Circular(Data = data2, Spec = "Vouacapoua_americana",Pattern = c("Fl"),
-                 Obs_Veg = "PPFlo",perYears = FALSE)[[2]]
 
 
-  # par mois et par année
-   Leaf_Circular(Data = data2, Spec ="Symphonia_globulifera" ,Pattern = c("Fl"),
-                 Obs_Veg = "PPFlo",perYears = TRUE)[[2]]
-
-   Leaf_Circular(Data = data2, Spec ="Symphonia_sp.1" ,Pattern = c("Fl"),
-                 Obs_Veg = "PPFlo",perYears = TRUE)[[2]]
-
-   Leaf_Circular(Data = data2, Spec ="Vouacapoua_americana" ,Pattern = c("Fl"),
-                 Obs_Veg = "PPFlo",perYears = TRUE)[[2]]
-
-
- ## Proportion d’individus dans une phénophase donnée
-   #Nous détectons le pic (début, max, fin) en fonction des paramètres et du signal traité (Moyenne mobile)
-
-                              # signal
-
-   data_signal = LeafedOTim(Data=data2 %>% filter(Usable==1),
-                            Spec= "Symphonia_globulifera",
-                            Pattern=c("Fl"),
-                            Obs_Veg = "PPFlo")[[1]]
-
-   signal = data_signal %>% select(prop) %>% pull()
-   moyenne_mobile <- moving_average(data_signal %>% select(prop) %>%
-                                      pull(),filter = fpoids(n=2,p=2,q=2)$y)
-
-   #Vous pouvez régler le nombre de voisines pour le signal traité sur les paramètres "n"
-
-
-   #   On indentifie les différents pics positif et négatif
-
-   dates = data_signal %>% select(date) %>% pull() # Extracting the differents dates
-   # the maximum of pics
-   dates_max = sort(findpeaks(moyenne_mobile,minpeakheight  = 10,nups =1)[,2])
-   # When the pics begin
-   dates_begin =sort(findpeaks(moyenne_mobile,minpeakheight  = 10,nups = 1)[,3])
-   # When the pics end
-   dates_end = sort(findpeaks(moyenne_mobile,minpeakheight  = 10,nups = 1)[,4])
-   # Percent of ind by peaks
-   amplitude_peaks = findpeaks(moyenne_mobile,minpeakheight  = 10,nups = 1)[,1]
-
-   #Il faut ensuite calculer l’amplitude réelle des crêtes
-           déterminées sur le signal traité
-
-
-           amplitude_real = signal[dates_max]
-
-   ## Tracé du signal d'origine, de la moyenne mobile et de la dérivée avec ggplot2
-           Plot = ggplot(data_signal, aes(x = date)) +
-             geom_line(aes(y = prop, color = "original signal")) +
-             geom_line(aes(y = moyenne_mobile, color = "processed signal"))+
-             geom_point(aes(y = prop, color = "original signal")) +
-             scale_color_manual(values = c("original signal" = "blue","processed signal" = "red"))+
-             theme(axis.text.x = element_text(angle = 90),
-                   panel.background = element_rect(fill = "white")) +
-             geom_vline(xintercept = dates[dates_max],col = "tomato3" , linetype = "dashed") +
-             geom_vline(xintercept = dates[dates_begin],col = "grey30", linetype = "dashed") +
-             geom_vline(xintercept = dates[dates_end],col = "grey30", linetype = "dashed") +
-             scale_x_date(date_breaks = "2 month", date_labels = "%b-%Y") +
-             labs(title = "original and processed signal by Moving average", x = "Time", y = "Value") +
-             annotate("text",x = dates[dates_max], y= 100,label = paste(round(amplitude_real,1),"%"),col = "grey40")
-
-           Plot
-
-           Leaf_Pattern(Data = Full %>% filter(Usable ==1), Obs_Veg ="PPVeg", Spec = WantedSpec, fertility = TRUE)[[2]] +    geom_vline(xintercept = dates[dates_max], col = "white" , linetype = "dashed") +
-             geom_vline(xintercept = dates[dates_begin], col = "black" , linetype = "dashed") +
-             geom_vline(xintercept = dates[dates_end], col = "black" , linetype = "dashed")
-
-           summary_table = tibble(Genus_Spec = data_signal$Genus_Spec %>% unique(),
-                                  max = dates[dates_max],
-                                  range = abs(difftime(dates[dates_begin],dates[dates_end])),
-                                  start = dates[dates_begin],
-                                  end = dates[dates_end])kable(summary_table)
-
-
-
-           #tableau synthese pour le calcule des metriques
-
-
-           ## Filtrer que les Symphonia globulifera
-            data2 %>%
-             filter(Genus=="Symphonia" & Species=="globulifera") %>%
-             select (Genus_Spec,date,PPFlo) %>%
-             print()-> synthese_Sympho
-
-            ## Filtrer que les Symphonia globulifera
-            synthese_Sympho %>%
-             select (date,PPFlo) %>%
-              print()-> synthese_Sympho1
-
-  # Supposons que votre dataframe s'appelle "synthese_Sympho1" avec les colonnes "Annee" et "Date_floraison"
-
-            moyennes_floraison_par_annee <- aggregate(PPFlo ~date, data = synthese_Sympho1, FUN = mean)
-
-
-            ecart_type_par_annee <- aggregate(Date_floraison ~ Annee, data = donnees_floraison, FUN = sd)
 
 
 
